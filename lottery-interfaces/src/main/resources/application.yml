@@ -17,10 +17,12 @@ dubbo:
   application:
     name: Lottery
     version: 1.0.0
+    parameters:
+      unicast: false
   registry:
-    address: N/A #multicast://224.5.6.7:1234
+    address: multicast://112.124.7.131:28080
   protocol:
     name: dubbo
-    port: 20880
+    port: 28080
   scan:
     base-packages: cn.itedus.lottery.rpc
