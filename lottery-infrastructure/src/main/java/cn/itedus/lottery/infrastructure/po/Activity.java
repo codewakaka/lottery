@@ -2,6 +2,10 @@ package cn.itedus.lottery.infrastructure.po;
 
 import java.util.Date;
 
+
+/**
+ * 活动基本信息表
+ */
 public class Activity {
 
     // 自增ID
