@@ -9,7 +9,7 @@ import cn.itedus.lottery.rpc.IActivityBooth;
 import cn.itedus.lottery.rpc.dto.ActivityDto;
 import cn.itedus.lottery.rpc.req.ActivityReq;
 import cn.itedus.lottery.rpc.res.ActivityRes;
-import org.apache.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
