@@ -21,7 +21,7 @@ public class DrawBase extends DrawConfig {
         }
 
         List<AwardRateInfo> awardRateInfoList = new ArrayList<>(strategyDetailList.size());
-
+        //奖品信息，奖品概率和奖品id
         for (StrategyDetail strategyDetail : strategyDetailList) {
             awardRateInfoList.add(new AwardRateInfo(strategyDetail.getAwardId(),strategyDetail.getAwardRate()));
         }

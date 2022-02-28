@@ -33,6 +33,8 @@ public abstract class BaseAlgorithm implements IDrawAlgorithm {
 
     /**
      * 奖品区间概率值，strategyId -> [awardId -> begin、awardId -> end]
+     * 保存奖品id和奖品概率等基本信息集合
+     *
      */
     protected Map<Long, List<AwardRateInfo>> awardRateInfoMap = new ConcurrentHashMap<>();
 
@@ -42,6 +44,7 @@ public abstract class BaseAlgorithm implements IDrawAlgorithm {
         //保存奖品概率信息
         awardRateInfoMap.put(strategyId, awardRateInfoList);
 
+        //对 hashMap 中指定 key 的值进行重新计算，如果不存在这个 key，则添加到 hasMap 中
         String[] rateTuple = rateTupleMap.computeIfAbsent(strategyId, k -> new String[RATE_TUPLE_LENGTH]);
 
         int cursorVal = 0;
