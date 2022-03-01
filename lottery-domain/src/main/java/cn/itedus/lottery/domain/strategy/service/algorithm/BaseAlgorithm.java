@@ -50,7 +50,7 @@ public abstract class BaseAlgorithm implements IDrawAlgorithm {
         int cursorVal = 0;
 
         for (AwardRateInfo awardRateInfo : awardRateInfoList) {
-
+            //例如奖品1 中奖概率0.05 rateVal就是5
             int rateVal = awardRateInfo.getAwardRate().multiply(new BigDecimal(100)).intValue();
             //循环填充概率范围值
             for (int i = cursorVal + 1; i <= (rateVal + cursorVal); i++) {

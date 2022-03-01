@@ -51,7 +51,7 @@ public class DefaultRateRandomDrawAlgorithm extends BaseAlgorithm {
 
         int cursorVal = 0;
         for (AwardRateInfo awardRateInfo : differenceAwardRateList) {
-
+            //中奖概率除以总概率
             int rateVal = awardRateInfo.getAwardRate().divide(differenceDenominator,2,BigDecimal.ROUND_UP).multiply(new BigDecimal(100)).intValue();
             if(randomVal <= (cursorVal +rateVal)){
                 awardId = awardRateInfo.getAwardId();

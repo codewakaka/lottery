@@ -2,7 +2,7 @@ package cn.itedus.lottery.domain.strategy.service.draw.impl;
 
 import cn.itedus.lottery.domain.strategy.model.aggregates.StrategyRich;
 import cn.itedus.lottery.domain.strategy.model.res.DrawResult;
-import cn.itedus.lottery.domain.strategy.repository.IStrategyRepository;
+import cn.itedus.lottery.domain.strategy.model.repository.IStrategyRepository;
 import cn.itedus.lottery.domain.strategy.service.algorithm.IDrawAlgorithm;
 import cn.itedus.lottery.domain.strategy.service.draw.DrawBase;
 import cn.itedus.lottery.domain.strategy.service.draw.IDrawExec;

@@ -1,7 +1,7 @@
-package cn.itedus.lottery.domain.strategy.repository.impl;
+package cn.itedus.lottery.domain.strategy.model.repository.impl;
 
 import cn.itedus.lottery.domain.strategy.model.aggregates.StrategyRich;
-import cn.itedus.lottery.domain.strategy.repository.IStrategyRepository;
+import cn.itedus.lottery.domain.strategy.model.repository.IStrategyRepository;
 import cn.itedus.lottery.infrastructure.dao.IAwardDao;
 import cn.itedus.lottery.infrastructure.dao.IStrategyDao;
 import cn.itedus.lottery.infrastructure.dao.IStrategyDetailDao;
