@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.itedus.lottery.infrastructure.dao.IStrategyDetailDao">
-
-    <select id="queryStrategyDetailList" parameterType="java.lang.Long" resultType="cn.itedus.lottery.infrastructure.po.StrategyDetail">
+    <select id="queryStrategyDetailList" parameterType="java.lang.Long"
+            resultType="cn.itedus.lottery.infrastructure.po.StrategyDetail">
         SELECT id, strategyId, awardId, awardCount, awardRate, createTime, updateTime
         FROM strategy_detail
         WHERE strategyId = #{strategyId}
     </select>
 
+
+    <select id="queryNoStockStrategyAwardList" parameterType="java.lang.Long" resultType="java.lang.String">
+        SELECT awardId
+        from strategy_detail
+        where strategyId = #{strategyId,jdbcType=BIGINT}
+          and awardSurplusCount = 0
+    </select>
+
+    <update id="deductStock" parameterType="cn.itedus.lottery.infrastructure.po.StrategyDetail">
+        update strategy_detail set awardSurplusCount = awardSurplusCount -1
+        where strategyId = #{strategyId,jdbcType=BIGINT} and awardId =#{awardId,jdbcType=VARCHAR} and awardSurplusCount > 0
+    </update>
 </mapper>
