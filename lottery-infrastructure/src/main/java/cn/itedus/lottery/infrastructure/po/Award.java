@@ -22,10 +22,7 @@ public class Award {
      * 奖品描述 （ 文字描述 兑换码 优惠卷 实物奖品暂无 ）
      */
     private Integer awardType;
-    /**
-     * 奖品数量
-     */
-    private Integer awardCount;
+
 
     /**
      * 奖品名称
@@ -70,13 +67,7 @@ public class Award {
         this.awardType = awardType;
     }
 
-    public Integer getAwardCount() {
-        return awardCount;
-    }
 
-    public void setAwardCount(Integer awardCount) {
-        this.awardCount = awardCount;
-    }
 
     public String getAwardName() {
         return awardName;

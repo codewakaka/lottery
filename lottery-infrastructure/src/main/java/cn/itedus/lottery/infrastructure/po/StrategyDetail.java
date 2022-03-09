@@ -21,11 +21,19 @@ public class StrategyDetail {
      * 奖品id
      */
     private String awardId;
+    /**
+     * 奖品名称
+     */
+    private String awardName;
 
     /**
      * 奖品数量
      */
     private String awardCount;
+    /**
+     * 奖品剩余库存
+     */
+    private Integer awardSurplusCount;
 
     /**
      * 中奖概率
@@ -41,6 +49,22 @@ public class StrategyDetail {
      * 修改时间
      */
     private String updateTime;
+
+    public String getAwardName() {
+        return awardName;
+    }
+
+    public void setAwardName(String awardName) {
+        this.awardName = awardName;
+    }
+
+    public Integer getAwardSurplusCount() {
+        return awardSurplusCount;
+    }
+
+    public void setAwardSurplusCount(Integer awardSurplusCount) {
+        this.awardSurplusCount = awardSurplusCount;
+    }
 
     public String getId() {
         return id;
