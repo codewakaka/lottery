@@ -269,4 +269,50 @@ public class Constants {
 
     }
 
+    /**
+     * id生成策略
+     */
+    public enum Ids{
+        /**
+         * 雪花
+         */
+        SnowFlake(1, "雪花"),
+        /**
+         * 日期
+         */
+        ShortCode(2, "日期"),
+        /**
+         * 随机数
+         */
+        RandomNumeric(3, "随机数"),
+        ;
+
+
+        private Integer code;
+        private String info;
+
+        Ids(Integer code, String info) {
+            this.code = code;
+            this.info = info;
+        }
+
+        public Integer getCode() {
+            return code;
+        }
+
+        public void setCode(Integer code) {
+            this.code = code;
+        }
+
+        public String getInfo() {
+            return info;
+        }
+
+        public void setInfo(String info) {
+            this.info = info;
+        }
+
+
+    }
+
 }
