@@ -3,7 +3,7 @@ package cn.itedus.lottery.domain.strategy.service.draw;
 
 import cn.itedus.lottery.domain.strategy.model.aggregates.StrategyRich;
 import cn.itedus.lottery.domain.strategy.model.repository.IStrategyRepository;
-import cn.itedus.lottery.infrastructure.po.Award;
+import cn.itedus.lottery.domain.strategy.model.vo.AwardBriefVO;
 
 import javax.annotation.Resource;
 
@@ -31,7 +31,7 @@ public class DrawStrategySupport extends DrawConfig{
      * @param awardId
      * @return
      */
-    protected Award queryAwardInfoByAwardId(String awardId){
+    protected AwardBriefVO queryAwardInfoByAwardId(String awardId){
         return strategyRepository.queryAwardInfo(awardId);
     }
 

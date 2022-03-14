@@ -1,6 +1,7 @@
 package cn.itedus.lottery.domain.support.ids.policy;
 
 import cn.itedus.lottery.domain.support.ids.IIdGenerator;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,6 +12,6 @@ import org.springframework.stereotype.Component;
 public class RandomNumeric implements IIdGenerator {
     @Override
     public Long nextId() {
-        return null;
+        return Long.parseLong(RandomStringUtils.randomNumeric(11));
     }
 }

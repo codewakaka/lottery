@@ -4,6 +4,7 @@ import cn.itedus.lottery.common.Constants;
 import cn.itedus.lottery.domain.support.ids.policy.RandomNumeric;
 import cn.itedus.lottery.domain.support.ids.policy.ShortCode;
 import cn.itedus.lottery.domain.support.ids.policy.SnowFlake;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.HashMap;
@@ -25,7 +26,7 @@ public class IdContext {
      * @param randomNumeric 随机算法，短码，大量，全局唯一需要自己保证
      * @return IIdGenerator 实现类
      */
-
+    @Bean
     public Map<Constants.Ids,IIdGenerator> idGenerator(SnowFlake snowFlake, ShortCode shortCode, RandomNumeric randomNumeric){
         Map<Constants.Ids, IIdGenerator> idGeneratorMap = new HashMap<>(8);
         idGeneratorMap.put(Constants.Ids.SnowFlake, snowFlake);
