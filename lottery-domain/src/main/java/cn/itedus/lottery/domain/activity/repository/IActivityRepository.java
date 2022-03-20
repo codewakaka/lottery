@@ -1,10 +1,8 @@
 package cn.itedus.lottery.domain.activity.repository;
 
 import cn.itedus.lottery.common.Constants;
-import cn.itedus.lottery.domain.activity.model.vo.ActivityVO;
-import cn.itedus.lottery.domain.activity.model.vo.AwardVO;
-import cn.itedus.lottery.domain.activity.model.vo.StrategyDetailVO;
-import cn.itedus.lottery.domain.activity.model.vo.StrategyVO;
+import cn.itedus.lottery.domain.activity.model.req.PartakeReq;
+import cn.itedus.lottery.domain.activity.model.vo.*;
 
 import java.util.List;
 
@@ -45,4 +43,18 @@ public interface IActivityRepository {
      * @param strategyDetailList
      */
     void addStrategyDetailList(List<StrategyDetailVO> strategyDetailList);
+
+    /**
+     * 查询活动账单信息【库存，状态，日期，个人参与次数】
+     * @param req
+     * @return
+     */
+    ActivityBillVO queryActivityBill(PartakeReq req);
+
+    /**
+     * 扣减活动库存
+     * @param activityId
+     * @return
+     */
+    int subtractionActivityStock(Long activityId);
 }

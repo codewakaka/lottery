@@ -12,6 +12,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
@@ -47,5 +49,25 @@ public class ApiTest {
         Activity activity = activityDao.queryActivityById(100002L);
         logger.info("测试结果：{}", JSON.toJSONString(activity));
     }
+
+    @Test
+    public void test_idx() {
+
+        Map<Integer, Integer> map = new HashMap<>();
+
+        int HASH_INCREMENT = 0x61c88647;
+        int hashCode = 0;
+        for (int i = 1; i <= 100; i++) {
+            hashCode = i * HASH_INCREMENT + HASH_INCREMENT;
+            int idx = hashCode & (128 - 1);
+
+            map.merge(idx, 1, Integer::sum);
+
+            System.out.println("斐波那契散列：" + idx + " 普通散列：" + (String.valueOf(i).hashCode() & (128 - 1)));
+        }
+
+        System.out.println(map);
+    }
+
 
 }
