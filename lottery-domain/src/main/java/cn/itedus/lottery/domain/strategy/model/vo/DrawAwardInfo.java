@@ -1,5 +1,7 @@
 package cn.itedus.lottery.domain.strategy.model.vo;
 
+import java.util.Date;
+
 /**
  * 中奖奖品信息
  */
@@ -18,11 +20,24 @@ public class DrawAwardInfo {
      * 奖品名称
      */
     private String awardName;
-
-    private String awardContent;
     /**
      * 奖品内容「描述、奖品码、sku」
      */
+    private String awardContent;
+
+    /**
+     * 策略方式（1单项概率  2总体概率）
+     */
+    private Integer strategyMode;
+
+    /**
+     * 发奖品方式 1及时 2定时【含活动结束】 3人工
+     */
+    private Integer grantType;
+
+
+    private Date grantDate;
+
     public DrawAwardInfo() {
     }
 
@@ -31,6 +46,30 @@ public class DrawAwardInfo {
         this.awardType = awardType;
         this.awardName = awardName;
         this.awardContent = awardContent;
+    }
+
+    public Integer getStrategyMode() {
+        return strategyMode;
+    }
+
+    public void setStrategyMode(Integer strategyMode) {
+        this.strategyMode = strategyMode;
+    }
+
+    public Integer getGrantType() {
+        return grantType;
+    }
+
+    public void setGrantType(Integer grantType) {
+        this.grantType = grantType;
+    }
+
+    public Date getGrantDate() {
+        return grantDate;
+    }
+
+    public void setGrantDate(Date grantDate) {
+        this.grantDate = grantDate;
     }
 
     public String getAwardId() {

@@ -49,7 +49,7 @@ public class ActivityBillVO {
     /**
      * 策略id
      */
-    private Long startegyId;
+    private Long strategyId;
 
     /**
      * 每人可参与次数
@@ -118,12 +118,12 @@ public class ActivityBillVO {
         this.state = state;
     }
 
-    public Long getStartegyId() {
-        return startegyId;
+    public Long getStrategyId() {
+        return strategyId;
     }
 
-    public void setStartegyId(Long startegyId) {
-        this.startegyId = startegyId;
+    public void setStrategyId(Long strategyId) {
+        this.strategyId = strategyId;
     }
 
     public Integer getTakeCount() {

@@ -5,9 +5,10 @@ import cn.itedus.lottery.common.Constants;
 import cn.itedus.lottery.common.Result;
 import cn.itedus.lottery.domain.activity.model.req.PartakeReq;
 import cn.itedus.lottery.domain.activity.model.vo.ActivityBillVO;
+import cn.itedus.lottery.domain.activity.model.vo.DrawOrderVO;
+import cn.itedus.lottery.domain.activity.model.vo.UserTakeActivityVO;
 import cn.itedus.lottery.domain.activity.repository.IUserTakeActivityRepository;
 import cn.itedus.lottery.domain.activity.serivce.partake.BaseActivityPartake;
-import cn.itedus.lottery.domain.support.ids.IIdGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DuplicateKeyException;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
-import java.util.Map;
 
 @Service
 public class ActivityPartakeImpl extends BaseActivityPartake {
@@ -26,12 +26,14 @@ public class ActivityPartakeImpl extends BaseActivityPartake {
     private IUserTakeActivityRepository userTakeActivityRepository;
 
     @Resource
-    private Map<Constants.Ids, IIdGenerator> idGeneratorMap;
-
-    @Resource
     private TransactionTemplate transactionTemplate;
     @Resource
     private IDBRouterStrategy dbRouter;
+
+    @Override
+    protected UserTakeActivityVO queryNoConsumedTakeActivityOrder(Long activityId, String uId) {
+        return userTakeActivityRepository.queryNoConsumedTakeActivityOrder(activityId,uId);
+    }
 
     @Override
     protected Result checkActivityBill(PartakeReq partake, ActivityBillVO bill) {
@@ -72,7 +74,7 @@ public class ActivityPartakeImpl extends BaseActivityPartake {
     }
 
     @Override
-    protected Result grabActivity(PartakeReq partake, ActivityBillVO bill) {
+    protected Result grabActivity(PartakeReq partake, ActivityBillVO bill,Long takeId) {
         try {
             dbRouter.doRouter(partake.getuId());
             return transactionTemplate.execute(status -> {
@@ -85,8 +87,7 @@ public class ActivityPartakeImpl extends BaseActivityPartake {
                         return Result.buildResult(Constants.ResponseCode.NO_UPDATE);
                     }
                     //插入活动领取信息
-                    Long takeId = idGeneratorMap.get(Constants.Ids.SnowFlake).nextId();
-                    userTakeActivityRepository.takeActivity(bill.getActivityId(), bill.getActivityName(), bill.getTakeCount(), bill.getUserTakeLeftCount(), partake.getuId(), partake.getPartakeDate(), takeId);
+                    userTakeActivityRepository.takeActivity(bill.getActivityId(), bill.getActivityName(),bill.getStrategyId(), bill.getTakeCount(), bill.getUserTakeLeftCount(), partake.getuId(), partake.getPartakeDate(), takeId);
 
                 } catch (DuplicateKeyException e) {
                     status.setRollbackOnly();
@@ -96,6 +97,32 @@ public class ActivityPartakeImpl extends BaseActivityPartake {
                 return Result.buildSuccessResult();
             });
         } finally {
+            dbRouter.clear();
+        }
+    }
+
+    @Override
+    public Result recordDrawOrder(DrawOrderVO drawOrder) {
+        try {
+            dbRouter.doRouter(drawOrder.getuId());
+            return transactionTemplate.execute(status -> {
+                try {
+                    int lockCount = userTakeActivityRepository.lockTackActivity(drawOrder.getuId(), drawOrder.getStrategyId(), drawOrder.getTakeId());
+                    if(0 == lockCount){
+                        status.setRollbackOnly();
+                        logger.error("记录中奖单,个人参与活动抽奖已消耗完,activityId：{}，uId{}",drawOrder.getActivityId(),drawOrder.getuId());
+                        return Result.buildResult(Constants.ResponseCode.NO_UPDATE);
+                    }
+                    userTakeActivityRepository.saveUserStrategyExport(drawOrder);
+
+                }catch (DuplicateKeyException e){
+                    status.setRollbackOnly();
+                    logger.error("记录中奖单，唯一索引冲突 activityId：{} uId：{}", drawOrder.getActivityId(), drawOrder.getuId(), e);
+                    return Result.buildResult(Constants.ResponseCode.INDEX_DUP);
+                }
+                return Result.buildSuccessResult();
+            });
+        }finally {
             dbRouter.clear();
         }
     }
