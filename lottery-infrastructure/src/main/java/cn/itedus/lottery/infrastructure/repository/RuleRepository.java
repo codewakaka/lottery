@@ -57,17 +57,17 @@ public class RuleRepository implements IRuleRepository {
                     treeNodeLineInfo.setRuleLimitValue(nodeLine.getRuleLimitValue());
                     treeNodeLineInfoList.add(treeNodeLineInfo);
                 }
-                TreeNodeVO treeNodeInfo = new TreeNodeVO();
-                treeNodeInfo.setTreeId(treeNode.getTreeId());
-                treeNodeInfo.setTreeNodeId(treeNode.getId());
-                treeNodeInfo.setNodeType(treeNode.getNodeType());
-                treeNodeInfo.setNodeValue(treeNode.getNodeValue());
-                treeNodeInfo.setRuleKey(treeNode.getRuleKey());
-                treeNodeInfo.setRuleDesc(treeNode.getRuleDesc());
-                treeNodeInfo.setTreeNodeLineInfoList(treeNodeLineInfoList);
-                treeNodeMap.put(treeNode.getId(),treeNodeInfo);
-            }
 
+            }
+            TreeNodeVO treeNodeInfo = new TreeNodeVO();
+            treeNodeInfo.setTreeId(treeNode.getTreeId());
+            treeNodeInfo.setTreeNodeId(treeNode.getId());
+            treeNodeInfo.setNodeType(treeNode.getNodeType());
+            treeNodeInfo.setNodeValue(treeNode.getNodeValue());
+            treeNodeInfo.setRuleKey(treeNode.getRuleKey());
+            treeNodeInfo.setRuleDesc(treeNode.getRuleDesc());
+            treeNodeInfo.setTreeNodeLineInfoList(treeNodeLineInfoList);
+            treeNodeMap.put(treeNode.getId(),treeNodeInfo);
         }
         TreeRuleRich treeRuleRich =new TreeRuleRich();
         treeRuleRich.setTreeRoot(treeRoot);
