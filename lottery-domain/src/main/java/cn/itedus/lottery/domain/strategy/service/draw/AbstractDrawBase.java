@@ -53,7 +53,7 @@ public abstract class AbstractDrawBase extends DrawStrategySupport implements ID
             return new DrawResult(uId,strategyId,Constants.DrawState.FAIL.getCode());
         }
         AwardBriefVO award = super.queryAwardInfoByAwardId(awardId);
-        DrawAwardInfo drawAwardInfo = new DrawAwardInfo(award.getAwardId(),award.getAwardType(),award.getAwardName(),award.getAwardContent());
+        DrawAwardVO drawAwardInfo = new DrawAwardVO(uId,award.getAwardId(),award.getAwardType(),award.getAwardName(),award.getAwardContent());
         drawAwardInfo.setStrategyMode(strategy.getStrategyMode());
         drawAwardInfo.setGrantType(strategy.getGrantType());
         drawAwardInfo.setGrantDate(strategy.getGrantDate());
@@ -95,9 +95,9 @@ public abstract class AbstractDrawBase extends DrawStrategySupport implements ID
             return;
         }
         //解析并初始化中奖概率数据到散列中
-        List<AwardRateInfo> awardRateInfoList = new ArrayList<>(strategyDetailList.size());
+        List<AwardRateVO> awardRateInfoList = new ArrayList<>(strategyDetailList.size());
         for (StrategyDetailBriefVO strategyDetail : strategyDetailList) {
-            awardRateInfoList.add(new AwardRateInfo(strategyDetail.getAwardId(),strategyDetail.getAwardRate()));
+            awardRateInfoList.add(new AwardRateVO(strategyDetail.getAwardId(),strategyDetail.getAwardRate()));
         }
         drawAlgorithm.initRateTuple(strategyId,awardRateInfoList);
 

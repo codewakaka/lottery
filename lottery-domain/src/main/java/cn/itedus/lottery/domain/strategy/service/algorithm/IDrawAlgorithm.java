@@ -1,7 +1,7 @@
 package cn.itedus.lottery.domain.strategy.service.algorithm;
 
 
-import cn.itedus.lottery.domain.strategy.model.vo.AwardRateInfo;
+import cn.itedus.lottery.domain.strategy.model.vo.AwardRateVO;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public interface IDrawAlgorithm {
      * @param strategyId
      */
 
-    void initRateTuple(Long strategyId, List<AwardRateInfo> awardRateInfoList);
+    void initRateTuple(Long strategyId, List<AwardRateVO> awardRateInfoList);
 
 
     /**

@@ -32,8 +32,9 @@ public class RuleTest {
         req.setTreeId(2110081902L);
         req.setUserId("fustack");
         req.setValMap(new HashMap<String, Object>() {{
-            put("gender", "man");
             put("age", "25");
+            put("gender", "man");
+
         }});
 
         EngineResult res = engineFilter.process(req);

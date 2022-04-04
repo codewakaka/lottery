@@ -14,6 +14,7 @@ public class Constants {
 
         LOSING_DRAW("D001", "未中奖"),
 
+        RULE_ERR("D002", "量化人群规则执行失败");
         ;
 
 

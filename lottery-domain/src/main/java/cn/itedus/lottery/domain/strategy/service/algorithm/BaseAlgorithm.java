@@ -1,7 +1,7 @@
 package cn.itedus.lottery.domain.strategy.service.algorithm;
 
 
-import cn.itedus.lottery.domain.strategy.model.vo.AwardRateInfo;
+import cn.itedus.lottery.domain.strategy.model.vo.AwardRateVO;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -36,11 +36,11 @@ public abstract class BaseAlgorithm implements IDrawAlgorithm {
      * 保存奖品id和奖品概率等基本信息集合
      *
      */
-    protected Map<Long, List<AwardRateInfo>> awardRateInfoMap = new ConcurrentHashMap<>();
+    protected Map<Long, List<AwardRateVO>> awardRateInfoMap = new ConcurrentHashMap<>();
 
 
     @Override
-    public void initRateTuple(Long strategyId, List<AwardRateInfo> awardRateInfoList) {
+    public void initRateTuple(Long strategyId, List<AwardRateVO> awardRateInfoList) {
         //保存奖品概率信息
         awardRateInfoMap.put(strategyId, awardRateInfoList);
 
@@ -49,7 +49,7 @@ public abstract class BaseAlgorithm implements IDrawAlgorithm {
 
         int cursorVal = 0;
 
-        for (AwardRateInfo awardRateInfo : awardRateInfoList) {
+        for (AwardRateVO awardRateInfo : awardRateInfoList) {
             //例如奖品1 中奖概率0.05 rateVal就是5
             int rateVal = awardRateInfo.getAwardRate().multiply(new BigDecimal(100)).intValue();
             //循环填充概率范围值
