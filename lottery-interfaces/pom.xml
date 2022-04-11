@@ -72,7 +72,10 @@
             <artifactId>mapstruct-processor</artifactId>
         </dependency>
         <!-- MapStruct end -->
-
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>cn.itedus.lottery</groupId>
